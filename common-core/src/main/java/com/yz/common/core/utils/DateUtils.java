@@ -398,7 +398,7 @@ public class DateUtils {
 	/**
 	 * 获取总天数
 	 * 
-	 * @param time
+	 * @param c
 	 *            毫秒数
 	 * @return 返回含当天
 	 */
@@ -737,4 +737,12 @@ public class DateUtils {
 		return lastDayOfMonth;
 	}
 
+
+
+
+	//本地测试
+	public static void main(String args[]) {
+		System.out.println(get45Date());
+		System.out.println("Hello World!");
+	}
 }
