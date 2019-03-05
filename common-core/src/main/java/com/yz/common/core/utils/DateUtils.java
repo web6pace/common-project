@@ -737,12 +737,4 @@ public class DateUtils {
 		return lastDayOfMonth;
 	}
 
-
-
-
-	//本地测试
-	public static void main(String args[]) {
-		System.out.println(get45Date());
-		System.out.println("Hello World!");
-	}
 }
