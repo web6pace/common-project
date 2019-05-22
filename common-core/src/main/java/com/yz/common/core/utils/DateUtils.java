@@ -19,6 +19,10 @@ public class DateUtils {
 	/** 一周英文对应的数字 */
 	public static final Map<String, Integer> WEEK_MAP = new HashMap<String, Integer>();
 
+	SimpleDateFormat longSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+	SimpleDateFormat shortSdf = new SimpleDateFormat("yyyy-MM-dd");
+
 	static {
 		WEEK_MAP.put("Monday", 1);
 		WEEK_MAP.put("Tuesday", 2);
@@ -144,7 +148,7 @@ public class DateUtils {
 
 	/**
 	 * 得到输入日期这个星期的星期一
-	 * 
+	 *  本周的星期一
 	 * @param date
 	 * @return
 	 */
@@ -182,7 +186,61 @@ public class DateUtils {
 		calendar.set(Calendar.MILLISECOND,00);
 		return calendar.getTime();
 	}
+	/**
+	 * 当前季度的开始时间
+	 *
+	 * @return
+	 */
+	public Date getCurrentQuarterStartTime() {
+		Calendar c = Calendar.getInstance();
+		int currentMonth = c.get(Calendar.MONTH) + 1;
+		Date now = null;
+		try {
+			if (currentMonth >= 1 && currentMonth <= 3)
+				c.set(Calendar.MONTH, 1);
+			else if (currentMonth >= 4 && currentMonth <= 6)
+				c.set(Calendar.MONTH, 3);
+			else if (currentMonth >= 7 && currentMonth <= 9)
+				c.set(Calendar.MONTH, 4);
+			else if (currentMonth >= 10 && currentMonth <= 12)
+				c.set(Calendar.MONTH, 9);
+			c.set(Calendar.DATE, 1);
+			now = longSdf.parse(shortSdf.format(c.getTime()) + " 00:00:00");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return now;
+	}
 
+	/**
+	 * 当前季度的结束时间
+	 *
+	 * @return
+	 */
+	public Date getCurrentQuarterEndTime() {
+		Calendar c = Calendar.getInstance();
+		int currentMonth = c.get(Calendar.MONTH) + 1;
+		Date now = null;
+		try {
+			if (currentMonth >= 1 && currentMonth <= 3) {
+				c.set(Calendar.MONTH, 2);
+				c.set(Calendar.DATE, 31);
+			} else if (currentMonth >= 4 && currentMonth <= 6) {
+				c.set(Calendar.MONTH, 5);
+				c.set(Calendar.DATE, 30);
+			} else if (currentMonth >= 7 && currentMonth <= 9) {
+				c.set(Calendar.MONTH,8);
+				c.set(Calendar.DATE, 30);
+			} else if (currentMonth >= 10 && currentMonth <= 12) {
+				c.set(Calendar.MONTH, 11);
+				c.set(Calendar.DATE, 31);
+			}
+			now = longSdf.parse(shortSdf.format(c.getTime()) + " 23:59:59");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return now;
+	}
 	/**
 	 * 根据传入的时间获取周最后一天（23：59：59 999）
 	 * @param date
@@ -737,4 +795,11 @@ public class DateUtils {
 		return lastDayOfMonth;
 	}
 
+	public static void main(String[] args) {
+		
+		DateUtils dateUtils = new DateUtils();
+		System.out.println("季度开始时间："+dateUtils.getCurrentQuarterStartTime());
+		System.out.println("季度结束时间："+dateUtils.getCurrentQuarterEndTime());
+
+	}
 }
