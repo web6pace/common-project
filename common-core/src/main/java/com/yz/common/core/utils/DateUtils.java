@@ -795,11 +795,59 @@ public class DateUtils {
 		return lastDayOfMonth;
 	}
 
+	/**
+	 * 在当前时间上增减周
+	 * @author conglj
+	 * @Date: 2019/5/24 10:22
+	 * @methodName getWeekAddNStr
+	 * @param n
+	 * @returns java.lang.String
+	 */
+	public static String getWeekAddNStr(Integer n) {
+		//获取时间加一年或加一月或加一天
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);//设置起时间
+		//System.out.println("111111111::::"+cal.getTime());
+		//	 cal.add(Calendar.YEAR, 1);//增加一年
+		//cd.add(Calendar.DATE, n);//增加一天
+		//cd.add(Calendar.DATE, -10);//减10天
+		cal.add(Calendar.WEDNESDAY, n);//增加一个周
+		System.out.println("输出::" + cal.getTime());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String week = sdf.format(cal.getTime());
+		return week;
+	}
+
+	/**
+	 * 在当前时间基础上增减月份
+	 * @author conglj
+	 * @Date: 2019/5/24 10:23
+	 * @methodName getMonthStr
+	 * @param n
+	 * @returns java.lang.String
+	 */
+	public String getMonthStr(Integer n) {
+		//获取时间加一年或加一月或加一天
+		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);//设置起时间
+		//System.out.println("111111111::::"+cal.getTime());
+		//	 cal.add(Calendar.YEAR, 1);//增加一年
+		//cd.add(Calendar.DATE, n);//增加一天
+		//cd.add(Calendar.DATE, -10);//减10天
+		cal.add(Calendar.MONTH, n);//增加一个月
+		System.out.println("输出::" + cal.getTime());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String month = sdf.format(cal.getTime());
+		return month;
+	}
 	public static void main(String[] args) {
-		
+
 		DateUtils dateUtils = new DateUtils();
 		System.out.println("季度开始时间："+dateUtils.getCurrentQuarterStartTime());
 		System.out.println("季度结束时间："+dateUtils.getCurrentQuarterEndTime());
+		System.out.println("上个月："+dateUtils.getMonthStr(-1));
 
 	}
 }
