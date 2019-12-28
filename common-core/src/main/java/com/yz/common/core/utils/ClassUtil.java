@@ -26,7 +26,7 @@ import java.util.Set;
 /**
  * @param
  * @author conglj
- * @Description:
+ * @Description: 对象属性复制
  * @Date: 2019/9/24 16:27
  * @methodName a
  * @returns

@@ -16,6 +16,33 @@ import java.util.Map;
  */
 public class DateUtils {
 
+	/**
+	 * @Description: 格式化中国标准时间
+	 * @author conglj
+	 * @Date: 2019/12/28 15:47
+	 * @methodName getDateByChinaDate
+	 * @param strDate
+	 * @returns java.util.Date
+	 */
+	public Date  getDateByChinaDate(String strDate) {
+
+		Date date = new Date();
+		try {
+//			String strDate = "Fri Mar 31 2017 00:00:00 GMT+0800 (中国标准时间)";
+			strDate = strDate.replace("GMT", "").replaceAll("\\(.*\\)", "");
+			SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd yyyy hh:mm:ss", Locale.ENGLISH);
+			date = format.parse(strDate);
+			System.out.println(new SimpleDateFormat("yyyy-MM-dd").format(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return date;
+	}
+
+
+
+
 	/** 一周英文对应的数字 */
 	public static final Map<String, Integer> WEEK_MAP = new HashMap<String, Integer>();
 
